@@ -175,7 +175,7 @@
 import dayjs from "dayjs"
 import "dayjs/locale/pt-br"
 import timezone from "dayjs/plugin/timezone"
-import { toast } from "vue3-toastify"
+import { showToastSuccess, showToastError } from "@/utils/toastUtils";
 dayjs.extend(timezone)
 
 import { fetchEvents, createEvent } from "@/services/api.ts"
@@ -308,38 +308,22 @@ export default {
   methods: {
     async finalizar() {
       if (!this.contato.nome) {
-        toast.error("Preencha o nome!", {
-          autoClose: 3000,
-          position: "top-right",
-          theme: "colored",
-        });
+        showToastError("Preencha o nome!");
         return;
       }
 
       if (this.contato.telefone.length < 15) {
-        toast.error("Preencha o telefone!", {
-          autoClose: 3000,
-          position: "top-right",
-          theme: "colored",
-        });
+        showToastError("Preencha o telefone!");
         return;
       }
 
       if (!this.evento.startDateTime) {
-        toast.error("Preencha o horário de início!", {
-          autoClose: 3000,
-          position: "top-right",
-          theme: "colored",
-        });
+        showToastError("Preencha o horário de início!");
         return;
       }
 
       if (!this.evento.endDateTime) {
-        toast.error("Preencha o horário de término!", {
-          autoClose: 3000,
-          position: "top-right",
-          theme: "colored",
-        });
+        showToastError("Preencha o horário de término!");
         return;
       }
 
